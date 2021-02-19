@@ -1,11 +1,13 @@
 package com.ga.marketcom.model;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -30,6 +32,10 @@ public class Product {
 	@Column(name="updatedat", nullable = false, updatable = true)
 	@UpdateTimestamp
 	private LocalDateTime updateAt;
+	
+	@OneToMany(mappedBy = "product")
+	private Set<ProductImage> productImages;
+	
 	public int getId() {
 		return id;
 	}
@@ -83,6 +89,13 @@ public class Product {
 	}
 	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
+	}
+	
+	public Set<ProductImage> getProductImages() {
+		return productImages;
+	}
+	public void setProductImages(Set<ProductImage> productImages) {
+		this.productImages = productImages;
 	}
 	
 }
