@@ -3,6 +3,7 @@ package com.ga.marketcom.controller;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -68,7 +69,7 @@ public class ProductController {
 	}
 	
 	// Edit a product of a specific shop
-		@PutMapping("/product/delete")
+		@DeleteMapping("/product/delete")
 		public Product deleteProduct(@RequestParam int productId) {
 			Product product = productDao.findById(productId);
 			Shop shop = product.getShop();

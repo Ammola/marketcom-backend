@@ -1,4 +1,5 @@
 package com.ga.marketcom.model;
+
 import java.time.LocalDateTime;
 import java.util.Set;
 import javax.persistence.Column;
@@ -10,11 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 @Entity
 @Table(name="Shop")
