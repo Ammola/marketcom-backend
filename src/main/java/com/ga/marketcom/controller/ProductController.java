@@ -66,5 +66,19 @@ public class ProductController {
 		shopDao.save(shop);
 		return newProduct;
 	}
+	
+	// Edit a product of a specific shop
+		@PutMapping("/product/delete")
+		public Product deleteProduct(@RequestParam int productId) {
+			Product product = productDao.findById(productId);
+			Shop shop = product.getShop();
+			Set<Product> allProducts = new HashSet<Product>();
+			allProducts = shop.getProducts();
+			allProducts.remove(product);
+			shop.setProducts(allProducts);
+			productDao.deleteById(productId);
+			shopDao.save(shop);
+			return product;
+		}
 
 }
