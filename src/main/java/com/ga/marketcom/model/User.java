@@ -1,11 +1,10 @@
 package com.ga.marketcom.model;
-
 import java.time.LocalDateTime;
-
 import javax.persistence.*;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="User")
@@ -30,6 +29,12 @@ public class User {
 	public int getId() {
 		return id;
 	}
+	
+	//@JsonManagedReference
+	@OneToOne
+    @JoinColumn(name = "Shop_Id", referencedColumnName = "id")
+    private Shop shop;
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -87,9 +92,11 @@ public class User {
 	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
+	public Shop getShop() {
+		return shop;
+	}
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
 	
-	 
-	
-	
-
 }

@@ -12,25 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 		@Autowired 
 		private Environment env;
 		
-		
-		
 		// HTTP GET REQUEST - Root Route
 		@GetMapping("/")
 		public ModelAndView home() {
 			ModelAndView mv = new ModelAndView();
-			
 			mv.setViewName("home/index");
-			
-			setAppName(mv, env);
-			
-//			articleDao.deletefromAuthorArticlesByID(4,18);
-			
-//			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//			if (!(authentication instanceof AnonymousAuthenticationToken)) {
-//			    String currentUserName = authentication.getName();
-//			    System.out.println(currentUserName);
-//			}
-			
+			setAppName(mv, env);			
 			return mv;
 		}
 		
@@ -38,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 		public ModelAndView setAppName(ModelAndView mv, @Autowired Environment env) {
 			String appName = env.getProperty("app.name");
 			mv.addObject("appName", appName);
-			mv.addObject("Welcome", "Welcome to our Blog App");
+			mv.addObject("Welcome", "Welcome to MarketCom");
 
 			return mv;
 		}

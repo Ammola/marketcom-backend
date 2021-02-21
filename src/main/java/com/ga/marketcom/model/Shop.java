@@ -1,20 +1,24 @@
 package com.ga.marketcom.model;
-
 import java.time.LocalDateTime;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
 @Entity
 @Table(name="Shop")
+@JsonIgnoreProperties(value= {"user"})
 public class Shop {
 	@Id
 	@GeneratedValue
@@ -28,8 +32,11 @@ public class Shop {
 	@UpdateTimestamp
 	private LocalDateTime updateAt;
 	
+	@OneToOne(mappedBy ="shop")
+	private User user;
+	
 	@OneToMany(mappedBy = "shop")
-	private Set<Product> Products;
+	private Set<Product> products;
 
 	public int getId() {
 		return id;
@@ -64,11 +71,18 @@ public class Shop {
 	}
 
 	public Set<Product> getProducts() {
-		return Products;
+		return products;
 	}
 
 	public void setProducts(Set<Product> products) {
-		Products = products;
+		this.products = products;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

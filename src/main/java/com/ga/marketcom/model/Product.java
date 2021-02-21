@@ -15,8 +15,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="Product")
+@JsonIgnoreProperties(value= {"shop"})
 public class Product {
 	@Id
 	@GeneratedValue
@@ -38,6 +42,7 @@ public class Product {
 	@OneToMany(mappedBy = "product")
 	private Set<ProductImage> productImages;
 	
+	//@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "FK_ShopId")
 	private Shop shop;
@@ -96,7 +101,6 @@ public class Product {
 	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
-	
 	public Set<ProductImage> getProductImages() {
 		return productImages;
 	}
