@@ -37,18 +37,18 @@ public class ForgotPasswordController {
 	@PutMapping("/user/forgotpassword")
 	public User forgotPassword(@RequestBody User user) throws UnsupportedEncodingException, MessagingException{
 		HashMap<String,String> response=new HashMap<String,String>();
-        String random = RandomString.make(35);
+        String resetPassword = RandomString.make(35);
         
        
         user=dao.findByEmailAddress(user.getEmailAddress());
         
         if (user != null) {
-        	user.setResetPassword(random);
+        	user.setResetPassword(resetPassword);
         	 response.put("message", "Email Found"+user);
             dao.save(user);
            
         } 
-        String PasswordLink = Utility.getSiteURL(request) + "/user/resetpassword?random=" + random;
+        String PasswordLink = Utility.getSiteURL(request) + "/user/resetpassword?resetPassword=" + resetPassword;
 		sendEmail(user.getEmailAddress(), PasswordLink);
 		return user;
 	}
@@ -77,11 +77,11 @@ public class ForgotPasswordController {
 	}
 	
 	@PutMapping("/user/resetpassword")
-	public User processResetPassword( @RequestParam String random,@RequestBody passwordReq req) {
-		User user= new User();
-		 user=dao.findByResetPassword(random);
+	public User processResetPassword( @RequestParam String resetPassword,@RequestBody User user) {
+		//User user= new User();
+		 user=dao.findByResetPassword(resetPassword);
 		 if (user != null) {
-			 String pass=req.getPassword();
+			 String pass=user.getPassword();
 			 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	        String encodedPassword = passwordEncoder.encode(pass);
 	        user.setPassword(encodedPassword);
