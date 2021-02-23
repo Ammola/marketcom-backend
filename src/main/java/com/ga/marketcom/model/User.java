@@ -4,6 +4,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -30,15 +31,15 @@ public class User {
 	@Column(name="updatedat", nullable = false, updatable = true)
 	@UpdateTimestamp
 	private LocalDateTime updateAt;
-	public int getId() {
-		return id;
-	}
-	
 	//@JsonManagedReference
-	@OneToOne
+	//@JsonBackReference
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Shop_Id", referencedColumnName = "id")
     private Shop shop;
 	
+	public int getId() {
+		return id;
+	}
 	public void setId(int id) {
 		this.id = id;
 	}

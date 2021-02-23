@@ -3,6 +3,7 @@ package com.ga.marketcom.model;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,11 +40,13 @@ public class Product {
 	@UpdateTimestamp
 	private LocalDateTime updateAt;
 	
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
 	private Set<ProductImage> productImages;
 	
 	//@JsonBackReference
-	@ManyToOne
+	@JsonBackReference
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_ShopId")
 	private Shop shop;
 	

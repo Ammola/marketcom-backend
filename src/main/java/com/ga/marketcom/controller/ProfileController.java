@@ -57,51 +57,17 @@ public class ProfileController {
 		return user;
 		
 	}
-//	@GetMapping("/user/edit")
-//	public User getAuthor(@RequestBody User user) {
-//		user=dao.findByEmailAddress(user.getEmailAddress());
-//		 
-//		return user;
-//	}
+	@GetMapping("/user/editPersonalInfo")
+	public User getAuthor(@RequestBody User user) {
+		user=dao.findByEmailAddress(user.getEmailAddress());
+		 
+		return user;
+	}
 //	public User editAuthor(@RequestParam int id) {
 //		//User user = dao.findById(id);
 //		 User user = dao.findById(id);
 //		return user;
 //	}
-	
-//	@Autowired
-//	JwtUtil jwtUtil;
-//	@PutMapping("/user/editPersonalInfo")
-//	public User updateUser(@RequestBody User user,@RequestParam int id,HttpServletRequest request) {
-//		final String requestTokenHeader = request.getHeader("Authorization");
-//		 String username = null;
-//	        String jwtToken = null;
-//	        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-//	            jwtToken = requestTokenHeader.substring(7);
-//	                username = jwtUtil.getUsernameFromToken(jwtToken);
-//	                if(username.equals(user.getEmailAddress())) {
-//		
-//		BCryptPasswordEncoder token = new BCryptPasswordEncoder();
-//		String emailAddress=user.getEmailAddress();
-//		String firstName=user.getFirstName();
-//		String lastName=user.getLastName();
-//		String currentPassword=user.getPassword();
-//		String newPassword=user.getResetPassword();
-//		user=dao.findByEmailAddress(emailAddress);
-//		if(null != currentPassword)
-//	        if(token.matches(currentPassword, user.getPassword())) {
-//	            if(newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")) {
-//	            	user.setPassword(token.encode(newPassword));
-//	            }
-//	            
-//	        } 
-//		user.setFirstName(firstName);
-//		user.setLastName(lastName);
-//		user.setResetPassword(null);
-//		dao.save(user); }
-//		
-//	}return user;}
-	
 	@PutMapping("/user/editPersonalInfo")
 	public User updateUser(@RequestBody User user) {
 		BCryptPasswordEncoder token = new BCryptPasswordEncoder();

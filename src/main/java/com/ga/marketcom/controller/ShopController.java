@@ -24,8 +24,8 @@ public class ShopController {
 
 	// Add a shop for a specific shop owner
 	@PostMapping("/shop/add")
-	public Shop addShop(@RequestBody Shop shop, @RequestParam int userId) {
-		User user = userDao.findById(userId);
+	public Shop addShop(@RequestBody Shop shop, @RequestParam int id) {
+		User user = userDao.findById(id);
 		// Add a new shop if the user does not have a shop already
 		// and if the user has shop_owner role
 		if (user.getShop() == null && user.getUserRole().equals("ROLE_OWNER")) {
@@ -33,16 +33,22 @@ public class ShopController {
 			shop.setUser(user);
 			shopDao.save(shop);
 			userDao.save(user);
-			return user.getShop();
+			return shop;
 		}
 		return null;
 	}
 
 	// Return all shops
 	@GetMapping("/shop/index")
-	public Iterable<Shop> getShop() {
+	public Shop getShop(@RequestParam int id) {
+		User user = userDao.findById(id);
+		if(user.getUserRole().equals("ROLE_OWNER")) {
+			var it=user.getShop();
+			return it;
+		}
+		System.out.println(user.getShop());
 		var it = shopDao.findAll();
-		return it;
+		return (Shop) it;
 	}
 
 	// Return a shop of a specific shop owner
@@ -54,27 +60,21 @@ public class ShopController {
 
 	// Edit a shop of a specific shop owner
 	@PutMapping("/shop/edit")
-	public Shop editShop(@RequestBody Shop shop, @RequestParam int userId) {
-		User user = userDao.findById(userId);
-		if(user.getShop() != null) {
-			shop.setId(user.getShop().getId());
-			user.setShop(shop);
-			userDao.save(user);
+	public Shop editShop(@RequestBody Shop shop) {
+		
 			shopDao.save(shop);
-			return user.getShop();
-		}
-		return null;
+			return shop;
+		
 	}
 
 	// Delete a shop of a specific shop owner
 	@DeleteMapping("/shop/delete")
-	public Shop deleteShop(@RequestParam int userId) {
-		User user = userDao.findById(userId);
-		Shop shop = user.getShop(); 
-		user.setShop(null);
-		int shopId = shop.getId();
-		shopDao.deleteById(shopId);
-		return shop;
+	public boolean deleteShop(@RequestParam int id) {
+//		User user=new User();
+//		user=userDao.findByShop(id);
+		//user.setShop(null);
+		shopDao.deleteById(id);
+		return true;
 	}
 
 }
