@@ -2,6 +2,8 @@ package com.ga.marketcom.model;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +34,7 @@ public class Shop {
 	@OneToOne(mappedBy ="shop")
 	private User user;
 	
-	@OneToMany(mappedBy = "shop")
+	@OneToMany(mappedBy = "shop",cascade = CascadeType.ALL)
 	private Set<Product> products;
 
 	public int getId() {
