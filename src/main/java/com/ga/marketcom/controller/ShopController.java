@@ -61,7 +61,6 @@ public class ShopController {
 	// Edit a shop of a specific shop owner
 	@PutMapping("/shop/edit")
 	public Shop editShop(@RequestBody Shop shop) {
-		
 			shopDao.save(shop);
 			return shop;
 		
