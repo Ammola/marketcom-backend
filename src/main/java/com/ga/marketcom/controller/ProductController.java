@@ -40,12 +40,16 @@ public class ProductController {
 
 	// Return all products of a specific shop
 	@GetMapping("/product/index")
-	public Iterable<Product> getProducts(@RequestParam int shopId) {
-		Shop shop = shopDao.findById(shopId);
+	public Iterable<Product> getProducts(@RequestParam int id) {
+		Shop shop = shopDao.findById(id);
 		return shop.getProducts();
 
 	}
-
+	@GetMapping("/product/indexall")
+	public Iterable<Product> getAllProducts() {
+		var it = productDao.findAll();
+		return it;
+	}
 	// Return a product
 	@GetMapping("/product/detail")
 	public Product getProductDetail(@RequestParam int productId) {
