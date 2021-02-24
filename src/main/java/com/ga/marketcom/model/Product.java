@@ -32,6 +32,7 @@ public class Product {
 	private String productColor;
 	private float productPrice;
 	private String productDescription;
+	private String productImage;
 	
 	@Column(name="createdAt", nullable = false, updatable = false)
 	@CreationTimestamp
@@ -50,6 +51,14 @@ public class Product {
 	@JoinColumn(name = "FK_ShopId")
 	private Shop shop;
 	
+	
+	
+	public String getProductImage() {
+		return productImage;
+	}
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
+	}
 	public int getId() {
 		return id;
 	}
