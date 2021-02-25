@@ -1,28 +1,24 @@
- package com.ga.marketcom.model;
+package com.ga.marketcom.model;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name="Shop")
-@JsonIgnoreProperties(value= {"user"})
-public class Shop {
+@Table(name="Cart")
+public class Cart {
 	@Id
 	@GeneratedValue
 	private int id;
-	private String shopName;
+	private float totalPrice;
 	
 	@Column(name="createdAt", nullable = false, updatable = false)
 	@CreationTimestamp
@@ -31,11 +27,8 @@ public class Shop {
 	@UpdateTimestamp
 	private LocalDateTime updateAt;
 	
-	@OneToOne(mappedBy ="shop")
+	@OneToOne(mappedBy ="cart")
 	private User user;
-	
-	@OneToMany(mappedBy = "shop",cascade = CascadeType.ALL)
-	private Set<Product> products;
 
 	public int getId() {
 		return id;
@@ -45,12 +38,12 @@ public class Shop {
 		this.id = id;
 	}
 
-	public String getShopName() {
-		return shopName;
+	public float getTotalPrice() {
+		return totalPrice;
 	}
 
-	public void setShopName(String shopName) {
-		this.shopName = shopName;
+	public void setTotalPrice(float totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public LocalDateTime getCreateAt() {
@@ -69,14 +62,6 @@ public class Shop {
 		this.updateAt = updateAt;
 	}
 
-	public Set<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
-	
 	public User getUser() {
 		return user;
 	}
@@ -84,4 +69,5 @@ public class Shop {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
 }

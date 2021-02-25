@@ -4,9 +4,6 @@ import javax.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name="User")
 public class User {
@@ -31,11 +28,14 @@ public class User {
 	@Column(name="updatedat", nullable = false, updatable = true)
 	@UpdateTimestamp
 	private LocalDateTime updateAt;
-	//@JsonManagedReference
-	//@JsonBackReference
+
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Shop_Id", referencedColumnName = "id")
     private Shop shop;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Cart_Id", referencedColumnName = "id")
+    private Cart cart;
 	
 	public int getId() {
 		return id;
@@ -127,5 +127,11 @@ public class User {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	
+	public Cart getCart() {
+		return cart;
+	}
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
 }

@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ga.marketcom.config.JwtUtil;
+import com.ga.marketcom.dao.CartDao;
 import com.ga.marketcom.dao.UserDao;
+import com.ga.marketcom.model.Cart;
 import com.ga.marketcom.model.JwtResponse;
 import com.ga.marketcom.model.User;
+
 
 
 @RestController
@@ -25,6 +28,9 @@ public class UserController {
 	
 	@Autowired
 	private UserDao dao;
+	
+	@Autowired
+	private CartDao cartDao;
 	
 	@PostMapping("/user/registration")
 	public HashMap<String,String> registration (@RequestBody User user){
@@ -42,6 +48,10 @@ public class UserController {
 		 String newPassword = bCrypt.encode(user.getPassword());
 		 user.setPassword(newPassword);
 		 
+		 
+		 Cart cart = new Cart();
+		 cartDao.save(cart);
+		 user.setCart(cart); 
 		 dao.save(user);
 		 response.put("message", "User registered successfully");
 		
