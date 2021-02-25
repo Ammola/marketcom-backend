@@ -61,11 +61,11 @@ public class ProductController {
 	@PutMapping("/product/edit")
 	public Product editProduct(@RequestBody Product newProduct, @RequestParam int shopId) {
 		Shop shop = shopDao.findById(shopId);
-		Set<Product> allProducts = new HashSet<Product>();
-		allProducts = shop.getProducts();
-		allProducts.remove(newProduct);
-		allProducts.add(newProduct);
-		shop.setProducts(allProducts);
+//		Set<Product> allProducts = new HashSet<Product>();
+//		allProducts = shop.getProducts();
+//		allProducts.remove(newProduct);
+//		allProducts.add(newProduct);
+//		shop.setProducts(allProducts);
 		newProduct.setShop(shop);
 		productDao.save(newProduct);
 		shopDao.save(shop);
@@ -73,17 +73,17 @@ public class ProductController {
 	}
 	
 	// Edit a product of a specific shop
-		@DeleteMapping("/product/delete")
-		public Product deleteProduct(@RequestParam int productId) {
-			Product product = productDao.findById(productId);
-			Shop shop = product.getShop();
-			Set<Product> allProducts = new HashSet<Product>();
-			allProducts = shop.getProducts();
-			allProducts.remove(product);
-			shop.setProducts(allProducts);
-			productDao.deleteById(productId);
-			shopDao.save(shop);
-			return product;
-		}
+	@DeleteMapping("/product/delete")
+	public Product deleteProduct(@RequestParam int productId) {
+		Product product = productDao.findById(productId);
+		Shop shop = product.getShop();
+		Set<Product> allProducts = new HashSet<Product>();
+		allProducts = shop.getProducts();
+		allProducts.remove(product);
+		shop.setProducts(allProducts);
+		productDao.deleteById(productId);
+		shopDao.save(shop);
+		return product;
+	}
 
 }

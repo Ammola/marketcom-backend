@@ -68,12 +68,13 @@ public class ShopController {
 
 	// Delete a shop of a specific shop owner
 	@DeleteMapping("/shop/delete")
-	public boolean deleteShop(@RequestParam int id) {
-//		User user=new User();
-//		user=userDao.findByShop(id);
-		//user.setShop(null);
-		shopDao.deleteById(id);
-		return true;
+	public Shop deleteShop(@RequestParam int userId) {
+		User user = userDao.findById(userId);
+		Shop shop = user.getShop(); 
+		user.setShop(null);
+		int shopId = shop.getId();
+		shopDao.deleteById(shopId);
+		return shop;
 	}
 
 }
