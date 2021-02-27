@@ -12,8 +12,11 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="Cart")
+@JsonIgnoreProperties(value= {"user"})
 public class Cart {
 	@Id
 	@GeneratedValue
