@@ -62,20 +62,6 @@ public class ShopController {
 		return user.getShop();
 	}
 
-	// Edit a shop of a specific shop owner
-	@PutMapping("/shop/edit")
-	public Shop editShop(@RequestBody Shop shop) {
-		    //Shop savedShop = shopDao.findById(shopId);
-		    //Set<Product> shopProducts = new HashSet<Product>();
-		    //shopProducts = savedShop.getProducts(); 
-			//shopDao.save(shop);
-			//shop.setProducts(shopProducts);
-			shopDao.save(shop);
-			//shop.setProducts(shopProducts);
-			return shop;
-		
-	}
-
 	// Delete a shop of a specific shop owner
 	@DeleteMapping("/shop/delete")
 	public Shop deleteShop(@RequestParam int userId) {
