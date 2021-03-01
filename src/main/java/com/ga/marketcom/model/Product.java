@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,7 +17,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -45,13 +45,14 @@ public class Product {
 	private Set<ProductImage> productImages;
 	
 	//@JsonBackReference
-	@JsonBackReference
+	//@JsonBackReference
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_ShopId")
 	private Shop shop;
 	
-	
+	@ManyToMany(mappedBy="orderedProducts")
+	private Set<Order> orders;
 	
 	public String getProductImage() {
 		return productImage;
@@ -124,6 +125,12 @@ public class Product {
 	}
 	public void setShop(Shop shop) {
 		this.shop = shop;
+	}
+	public Set<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
 	}
 	
 }

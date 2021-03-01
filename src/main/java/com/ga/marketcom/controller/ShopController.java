@@ -1,5 +1,8 @@
 package com.ga.marketcom.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.ga.marketcom.dao.ShopDao;
 import com.ga.marketcom.dao.UserDao;
+import com.ga.marketcom.model.Product;
 import com.ga.marketcom.model.Shop;
 import com.ga.marketcom.model.User;
 
@@ -61,7 +65,13 @@ public class ShopController {
 	// Edit a shop of a specific shop owner
 	@PutMapping("/shop/edit")
 	public Shop editShop(@RequestBody Shop shop) {
+		    //Shop savedShop = shopDao.findById(shopId);
+		    //Set<Product> shopProducts = new HashSet<Product>();
+		    //shopProducts = savedShop.getProducts(); 
+			//shopDao.save(shop);
+			//shop.setProducts(shopProducts);
 			shopDao.save(shop);
+			//shop.setProducts(shopProducts);
 			return shop;
 		
 	}

@@ -1,5 +1,7 @@
 package com.ga.marketcom.model;
 import java.time.LocalDateTime;
+import java.util.Set;
+
 import javax.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -36,6 +38,9 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Cart_Id", referencedColumnName = "id")
     private Cart cart;
+	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	private Set<Order> orders;
 	
 	public int getId() {
 		return id;
@@ -133,5 +138,12 @@ public class User {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
+//	public Set<Order> getOrders() {
+//		return orders;
+//	}
+//	public void setOrders(Set<Order> orders) {
+//		this.orders = orders;
+//	}
+//	
 
 }
