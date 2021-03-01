@@ -44,6 +44,9 @@ public class Product {
 	@OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
 	private Set<ProductImage> productImages;
 	
+	@OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+	private Set<OrderProduct> orderProducts;
+	
 	//@JsonBackReference
 	//@JsonBackReference
 
@@ -51,8 +54,8 @@ public class Product {
 	@JoinColumn(name = "FK_ShopId")
 	private Shop shop;
 	
-	@ManyToMany(mappedBy="orderedProducts")
-	private Set<Order> orders;
+//	@ManyToMany(mappedBy="orderedProducts")
+//	private Set<Order> orders;
 	
 	public String getProductImage() {
 		return productImage;
@@ -126,11 +129,18 @@ public class Product {
 	public void setShop(Shop shop) {
 		this.shop = shop;
 	}
-	public Set<Order> getOrders() {
-		return orders;
+	public Set<OrderProduct> getOrderProducts() {
+		return orderProducts;
 	}
-	public void setOrders(Set<Order> orders) {
-		this.orders = orders;
+	public void setOrderProducts(Set<OrderProduct> orderProducts) {
+		this.orderProducts = orderProducts;
 	}
+	
+//	public Set<Order> getOrders() {
+//		return orders;
+//	}
+//	public void setOrders(Set<Order> orders) {
+//		this.orders = orders;
+//	}
 	
 }

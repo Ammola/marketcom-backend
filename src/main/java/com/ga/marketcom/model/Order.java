@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -34,6 +35,7 @@ public class Order {
 	private String paymentId;
 	private String billingToken;
 	private String facilitatorAccessToken;
+	private String amount;
 	
 	@Column(name="createdAt", nullable = false, updatable = false)
 	@CreationTimestamp
@@ -46,11 +48,16 @@ public class Order {
 	@JoinColumn(name = "FK_user_Id")
 	private User user;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "product_order",
-			   joinColumns = { @JoinColumn(name = "order_id") },
-			   inverseJoinColumns = { @JoinColumn(name = "product_id")})
-	private Set<Product> orderedProducts;
+	@OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+	private Set<OrderProduct> orderProducts;
+	
+//	@ManyToMany(fetch = FetchType.EAGER)
+//	@JoinTable(name = "product_order",
+//			   joinColumns = { @JoinColumn(name = "order_id") },
+//			   inverseJoinColumns = { 
+//					   @JoinColumn(name = "product_id")
+//					   })
+//	private Set<Product> orderedProducts;
 
 	public int getId() {
 		return id;
@@ -124,12 +131,28 @@ public class Order {
 		this.user = user;
 	}
 
-	public Set<Product> getOrderedProducts() {
-		return orderedProducts;
+	public Set<OrderProduct> getOrderProducts() {
+		return orderProducts;
 	}
 
-	public void setOrderedProducts(Set<Product> orderedProducts) {
-		this.orderedProducts = orderedProducts;
+	public void setOrderProducts(Set<OrderProduct> orderProducts) {
+		this.orderProducts = orderProducts;
 	}
+
+	public String getAmount() {
+		return amount;
+	}
+
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
+	
+//	public Set<Product> getOrderedProducts() {
+//		return orderedProducts;
+//	}
+//
+//	public void setOrderedProducts(Set<Product> orderedProducts) {
+//		this.orderedProducts = orderedProducts;
+//	}
 	
 }
