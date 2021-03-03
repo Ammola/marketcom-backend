@@ -138,12 +138,12 @@ public class User {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
-//	public Set<Order> getOrders() {
-//		return orders;
-//	}
-//	public void setOrders(Set<Order> orders) {
-//		this.orders = orders;
-//	}
-//	
+	public Set<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+	
 
 }

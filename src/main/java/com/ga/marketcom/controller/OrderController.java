@@ -2,6 +2,7 @@ package com.ga.marketcom.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import com.ga.marketcom.dao.UserDao;
 import com.ga.marketcom.model.Order;
 import com.ga.marketcom.model.OrderProduct;
 import com.ga.marketcom.model.Product;
+import com.ga.marketcom.model.Shop;
 import com.ga.marketcom.model.User;
 
 //@CrossOrigin(origins = "*")
@@ -54,6 +56,21 @@ public class OrderController {
 			savedOrderProduct.setOrder(order);
 			orderProductDao.save(orderProduct);
 			return orderProduct;
+		}
+		
+		@GetMapping("/order/index")
+		public Iterable<Order> getProducts(@RequestParam int userId) {
+			User user = userDao.findById(userId);
+			return user.getOrders();
+
+		}
+		
+		@GetMapping("/order-products/index")
+		public Iterable<OrderProduct> getProductsofOrder(@RequestParam int orderId) {
+			//System.out.println("FROM HERE");
+			Order order = orderDao.findById(orderId);
+			return order.getOrderProducts();
+
 		}
 		
 
