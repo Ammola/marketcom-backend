@@ -42,6 +42,8 @@ Authorization: Spring Security
 ## Link to ERD
 https://app.sqldbm.com/MySQL/Edit/p155562/#
 
+![Demo](ERD/ERD.gif)
+
 ## Installation instructions
 ### Clone the repo
 `git clone https://git.generalassemb.ly/ammola/marketcom-backend.git`
