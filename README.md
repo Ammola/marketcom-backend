@@ -42,7 +42,7 @@ Authorization: Spring Security
 ## Link to ERD
 https://app.sqldbm.com/MySQL/Edit/p155562/#
 
-![Demo](ERD/ERD.JPEG)
+![ERD](ERD/ERD.jpeg)
 
 ## Installation instructions
 ### Clone the repo
